@@ -1,0 +1,17 @@
+query GetPosts {
+  posts {
+    id
+    title
+    imageURL
+    postText
+    createdAt
+    updatedAt
+    user {
+      id
+      username
+      email
+      updatedAt
+      createdAt
+    }
+  }
+}

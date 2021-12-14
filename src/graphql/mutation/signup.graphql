@@ -1,0 +1,12 @@
+mutation SignUp($input: UsernamePasswordInput!) {
+  signup(input: $input) {
+    user {
+      id
+      username
+      email
+      updatedAt
+      createdAt
+    }
+    token
+  }
+}
