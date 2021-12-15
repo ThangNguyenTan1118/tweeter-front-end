@@ -1,8 +1,8 @@
-import { Card, Skeleton, Space } from "antd";
-import Meta from "antd/lib/card/Meta";
+import { Card, Skeleton, Space, Tag } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
 import { useGetPostsQuery } from "../../generated/graphql";
+import { EditOutlined, CommentOutlined, LikeOutlined } from "@ant-design/icons";
+import { TruncateText } from "../../components";
 
 const Home: React.FC = () => {
   const { loading, error, data } = useGetPostsQuery();
@@ -31,18 +31,23 @@ const Home: React.FC = () => {
         <Space direction="vertical" size="large">
           {data?.posts.map((post) => {
             return (
-              <Link key={post.id} to={`/posts/details/${post.id}`}>
-                <Card
-                  hoverable
-                  style={{ width: "100%" }}
-                  cover={<img alt={post.title} src={post.imageURL} />}
-                >
-                  <Meta
-                    title={`${post.title} created by ${post.user.username}`}
-                    description={post.postText}
-                  />
-                </Card>
-              </Link>
+              <Card
+                hoverable
+                style={{ width: "100%" }}
+                cover={<img alt={post.title} src={post.imageURL} />}
+                actions={[
+                  <Space>
+                    <LikeOutlined key="like" />
+                    <Tag color="blue">{post.totalLikes}</Tag>
+                  </Space>,
+                  <CommentOutlined key="comment" />,
+                  <EditOutlined key="edit" />,
+                ]}
+              >
+                <h2>{post.title}</h2>
+                <h4>Created by {post.user.username}</h4>
+                <TruncateText text={post.postText} />
+              </Card>
             );
           })}
         </Space>

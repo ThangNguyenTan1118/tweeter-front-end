@@ -10,3 +10,11 @@
 .text-center {
   text-align: center;
 }
+
+.toggle-text-btn {
+  color: #1890ff;
+}
+
+.toggle-text-btn:hover {
+  text-decoration: underline;
+}

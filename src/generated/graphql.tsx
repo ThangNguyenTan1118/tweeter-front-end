@@ -170,7 +170,7 @@ export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: '
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', id: number, title: string, imageURL: string, postText: string, createdAt: string, updatedAt: string, user: { __typename?: 'User', id: number, username: string, email: string, updatedAt: string, createdAt: string } }> };
+export type GetPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', id: number, title: string, imageURL: string, postText: string, createdAt: string, updatedAt: string, totalLikes: number, user: { __typename?: 'User', id: number, username: string, email: string, updatedAt: string, createdAt: string } }> };
 
 
 export const SignInDocument = gql`
@@ -263,6 +263,7 @@ export const GetPostsDocument = gql`
     postText
     createdAt
     updatedAt
+    totalLikes
     user {
       id
       username
