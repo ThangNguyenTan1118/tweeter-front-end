@@ -1,9 +1,14 @@
-import React from 'react';
+import React from "react";
+import "./App.css";
+import { AuthProvider } from "./context/auth";
+import { SignUp } from "./pages/SignUp";
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <AuthProvider>
+        <SignUp />
+      </AuthProvider>
     </div>
   );
 }
