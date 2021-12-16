@@ -31,7 +31,7 @@ const SignIn: React.FC = () => {
   return (
     <div className="auth-page">
       <div className="container">
-        <h1 className="text-center">Sign Up</h1>
+        <h1 className="text-center">Sign In</h1>
         <Form
           name="basic"
           initialValues={{}}
@@ -50,7 +50,7 @@ const SignIn: React.FC = () => {
               },
             ]}
             validateStatus={errors["email"] ? "error" : ""}
-            help={errors["email"] ? errors["email"] : ""}
+            help={errors["email"]}
           >
             <Input placeholder="Enter email" />
           </Form.Item>
@@ -59,6 +59,8 @@ const SignIn: React.FC = () => {
             label="Password"
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
+            validateStatus={errors["password"] ? "error" : ""}
+            help={errors["password"]}
           >
             <Input.Password placeholder="Enter password" />
           </Form.Item>

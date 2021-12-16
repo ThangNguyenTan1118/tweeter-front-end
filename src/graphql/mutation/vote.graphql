@@ -1,0 +1,5 @@
+mutation VotePost($postId: Float!) {
+  vote(postId: $postId) {
+    id
+  }
+}

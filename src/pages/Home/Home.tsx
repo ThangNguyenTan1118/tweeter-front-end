@@ -1,11 +1,18 @@
 import { Card, Skeleton, Space, Tag } from "antd";
-import React from "react";
-import { useGetPostsQuery } from "../../generated/graphql";
+import React, { useContext } from "react";
+import { useGetPostsQuery, useVotePostMutation } from "../../generated/graphql";
 import { EditOutlined, CommentOutlined, LikeOutlined } from "@ant-design/icons";
 import { TruncateText } from "../../components";
+import { AuthContext } from "../../context/auth";
 
 const Home: React.FC = () => {
-  const { loading, error, data } = useGetPostsQuery();
+  const auth = useContext(AuthContext);
+  const { loading, error, data, refetch } = useGetPostsQuery();
+  const [votePost] = useVotePostMutation({
+    onCompleted() {
+      refetch();
+    },
+  });
 
   if (loading) {
     return (
@@ -37,11 +44,26 @@ const Home: React.FC = () => {
                 cover={<img alt={post.title} src={post.imageURL} />}
                 actions={[
                   <Space>
-                    <LikeOutlined key="like" />
+                    <LikeOutlined
+                      key="like"
+                      onClick={() =>
+                        votePost({
+                          variables: {
+                            postId: post.id,
+                          },
+                        })
+                      }
+                    />
                     <Tag color="blue">{post.totalLikes}</Tag>
                   </Space>,
                   <CommentOutlined key="comment" />,
-                  <EditOutlined key="edit" />,
+                  <>
+                    {auth.user && post.user.id === auth.user.id ? (
+                      <EditOutlined key="edit" />
+                    ) : (
+                      <EditOutlined key="edit" className="disabled" />
+                    )}
+                  </>,
                 ]}
               >
                 <h2>{post.title}</h2>

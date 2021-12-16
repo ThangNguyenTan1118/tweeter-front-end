@@ -22,7 +22,11 @@ if (localStorage.getItem("jwtToken")) {
   }
 }
 
-const AuthContext = createContext({
+const AuthContext = createContext<{
+  user: User | null;
+  login: any;
+  logout: any;
+}>({
   user: null,
   // eslint-disable-next-line no-unused-vars
   login: (userData: AuthUser) => {},

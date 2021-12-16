@@ -40,6 +40,8 @@ const SignUp: React.FC = () => {
             label="Username"
             name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
+            validateStatus={errors["username"] ? "error" : ""}
+            help={errors["username"]}
           >
             <Input placeholder="Enter username" />
           </Form.Item>
@@ -55,7 +57,7 @@ const SignUp: React.FC = () => {
               },
             ]}
             validateStatus={errors["email"] ? "error" : ""}
-            help={errors["email"] ? errors["email"] : ""}
+            help={errors["email"]}
           >
             <Input placeholder="Enter email" />
           </Form.Item>
@@ -64,6 +66,8 @@ const SignUp: React.FC = () => {
             label="Password"
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
+            validateStatus={errors["password"] ? "error" : ""}
+            help={errors["password"]}
           >
             <Input.Password placeholder="Enter password" />
           </Form.Item>
