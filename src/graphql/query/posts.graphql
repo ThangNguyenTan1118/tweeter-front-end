@@ -14,5 +14,13 @@ query GetPosts {
       updatedAt
       createdAt
     }
+    comments {
+      id
+      createdAt
+      content
+      user {
+        username
+      }
+    }
   }
 }
